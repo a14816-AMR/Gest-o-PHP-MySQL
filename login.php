@@ -25,26 +25,35 @@ $erro = isset($_GET['erro']) ? $_GET['erro'] : '';
             return true;
         }
     </script>
-</head>
-<body class="pagina-login">
-    <div class="cartao-login">
-        <h2>Painel de Gestão</h2>
 
-        <?php if ($erro === '1'): ?>
+<head>
+  <title>Painel Gestao - Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<div class="container mt-3">
+<h2>Painel gestao - Login </h2>
+<form method="post" action="autenticar.php" onsubmit="return validar(this);">
+    <?php if ($erro === '1'): ?>
             <p class="mensagem erro">Utilizador ou password incorretos.</p>
         <?php endif; ?>
+ 
 
-        <form method="post" action="autenticar.php" onsubmit="return validar(this);">
-            <div class="campo">
-                <label>Utilizador</label>
-                <input type="text" name="utilizador">
-            </div>
-            <div class="campo">
-                <label>Password</label>
-                <input type="password" name="password">
-            </div>
-            <button type="submit">Entrar</button>
-        </form>
-    </div>
-</body>
+  <div class="mb-3 mt-3">
+    <label for="utilizador" class="form-label">Utilizador:</label>
+    <input type="text" class="form-control" id="utilizador" placeholder="Escreva o utilizador" name="utilizador">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password:</label>
+    <input type="password" class="form-control" id="password" placeholder="Escreva a password" name="password">
+  </div>
+  <button type="submit" class="btn btn-primary">Entrar</button>
+</form>
+</div>
+
+</head>
+
 </html>
