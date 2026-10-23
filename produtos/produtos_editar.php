@@ -2,6 +2,7 @@
 require 'protege.php';
 require 'db.php';
 $pagina_ativa = 'produtos';
+$categorias = mysqli_query($ligacao, "SELECT * FROM categorias ORDER BY nome");
 
 $id = (int) ($_GET['id'] ?? 0);
 $stmt = mysqli_prepare($ligacao, "SELECT * FROM produtos WHERE id = ?");
@@ -28,18 +29,17 @@ require 'cabecalho.php';
     <label>Categoria</label>
     <select name="categoria_id">
         <option value="">-- sem categoria --</option>
-        <?php while ($c = mysqli_fetch_assoc($categorias)): 
-            
-            $sel = '';
-            if($c['id'] == $produto['categoria_id']) $sel = "selected = 'selected'";
-            
-        ?>
-            <option <?$sel?> value="<?php echo $c['id']; ?>">
+        <?php while ($c = mysqli_fetch_assoc($categorias)):
+
+            $sel = '' ;
+            if($c['id'] == $produtos['categoria_id']) {
+                $sel = "selected='selected'";
+            }
+            ?>
+            <option  <?=$sel?>  value="<?php echo $c['id']; ?>">
                 <?php echo htmlspecialchars($c['nome']); ?>
             </option>
-
         <?php endwhile; ?>
-        
     </select>
     <button type="submit">Guardar</button>
 
