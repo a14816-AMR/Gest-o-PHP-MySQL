@@ -19,22 +19,29 @@ require 'cabecalho.php';
     <label>Nome do produto</label>
     <input type="text" name="nome"
            value="<?php echo htmlspecialchars($produtos['nome']); ?>" required>
-    <button type="submit">Atualizar</button>
 
     <label>Preço do produto</label>
     <input type="text" name="preco"
            value="<?php echo htmlspecialchars($produtos['preco']); ?>" required>
-    <button type="submit">Atualizar</button>
+    
 
     <label>Categoria</label>
     <select name="categoria_id">
         <option value="">-- sem categoria --</option>
-        <?php while ($c = mysqli_fetch_assoc($categorias)): ?>
-            <option value="<?php echo $c['id']; ?>">
+        <?php while ($c = mysqli_fetch_assoc($categorias)): 
+            
+            $sel = '';
+            if($c['id'] == $produto['categoria_id']) $sel = "selected = 'selected'";
+            
+        ?>
+            <option <?$sel?> value="<?php echo $c['id']; ?>">
                 <?php echo htmlspecialchars($c['nome']); ?>
             </option>
+
         <?php endwhile; ?>
+        
     </select>
+    <button type="submit">Guardar</button>
 
 </form>
 <?php require 'rodape.php'; ?>
